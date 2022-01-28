@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">ViewPager DB homework</string>
+    <string name="no_data">No users in database. Please, add a new one.</string>
+    <string name="first_name">First name</string>
+    <string name="last_name">Last name</string>
+    <string name="a_list_of_users">User list page</string>
+    <string name="add_new_user">Add new user</string>
+</resources>
