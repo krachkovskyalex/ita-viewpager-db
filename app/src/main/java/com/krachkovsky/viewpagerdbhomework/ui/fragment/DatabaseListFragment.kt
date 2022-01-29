@@ -9,7 +9,6 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import com.krachkovsky.viewpagerdbhomework.databinding.FragmentDatabaseListBinding
-import com.krachkovsky.viewpagerdbhomework.db.model.fromUserList
 import com.krachkovsky.viewpagerdbhomework.db.room.UsersDatabase
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -42,7 +41,8 @@ class DatabaseListFragment : Fragment() {
             UsersDatabase.getInstance(requireContext()).usersDao().getAll()
                 .flowWithLifecycle(viewLifecycleOwner.lifecycle, Lifecycle.State.STARTED)
                 .onEach {
-                    tvUserList.text = fromUserList(it)
+                    tvUserList.text = it.joinToString(separator = "\n")
+                    { user -> "${user.id}. ${user.firstName} ${user.lastName}" }
                 }
                 .launchIn(viewLifecycleOwner.lifecycleScope)
         }

@@ -22,6 +22,8 @@ class AddToDatabaseFragment : Fragment() {
             "View was destroyed"
         }
 
+    private val db = UsersDatabase.getInstance(requireContext())
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -46,12 +48,11 @@ class AddToDatabaseFragment : Fragment() {
 
                 viewLifecycleOwner.lifecycleScope.launch {
                     withContext(Dispatchers.IO) {
-                        UsersDatabase.getInstance(requireContext()).usersDao()
+                        db.usersDao()
                             .insert(User(firstName = firstName, lastName = lastName))
                     }
+                    Toast.makeText(requireContext(), "User added!", Toast.LENGTH_SHORT).show()
                 }
-
-                Toast.makeText(requireContext(), "User added!", Toast.LENGTH_SHORT).show()
             }
 
             btnClear.setOnClickListener {
